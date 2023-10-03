@@ -2,7 +2,9 @@ from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
 from langchain.memory import ConversationBufferMemory, CassandraChatMessageHistory
 from langchain.llms import OpenAI
-from langchain import LLMChain, PromptTemplate
+from langchain import LLMChain
+from langchain.prompts import PromptTemplate
+
 import json
 
 cloud_config = {
@@ -56,7 +58,7 @@ prompt = PromptTemplate(
 llm = OpenAI(OPENAPI_API_KEY=OPENAPI_API_KEY)
 llm_chain = LLMChain(
     llm=llm,
-    prompt=template,  # Use the template you defined
+    prompt=prompt,  # Use the template you defined
     memory=cass_buff_memory
 )
 
